@@ -1,0 +1,452 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Settings</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<header>
+    <div class="button-container">
+        <a class="btn btn-light btn-lg mx-2 terug-button my-auto" th:href="@{/}">Terug</a>
+        <div class="centered-buttons my-3">
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/sponsor}">Sponsor</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/stand}">Stand</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/event}">Event</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto nextButton" th:href="@{/admin/settingPage}">Love Card</a>
+        </div>
+    </div>
+</header>
+<div class="container-fluid mb-5">
+    <div class="row">
+        <div class="col-12 text-center my-2">
+            <h3>
+                Love Card aanpassen
+            </h3>
+        </div>
+        <div class="col-4 mt-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Huis in brand
+                    </h3>
+                </div>
+                <ul style="list-style-type: none; max-height: 250px; overflow-y: scroll;"
+                    class="list-group list-group-flush h-75 m-3">
+                    <li th:each="houseOnFire : ${houseOnFires}">
+                        <p th:text="${houseOnFire.getHouseOnFire()}"></p>
+                    </li>
+                </ul>
+                <button class="btn btn-primary float-end nextButton m-auto mb-2 w-50" type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasBottom1" aria-controls="offcanvasBottom">Edit
+                </button>
+            </div>
+            <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom1"
+                 aria-labelledby="offcanvasBottomLabel1">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasBottomLabel1">Edit Huis in brand</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body overflow-hidden">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <form class="pt-0 mt-0 mb-0 pb-0" th:action="@{|/admin/addHouseOnFireForm|}"
+                                      method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="addHouseOnFire">Huis in brand</label>
+                                        <input type="text" class="form-control mt-1" id="addHouseOnFire"
+                                               name="addHouseOnFire"
+                                               placeholder="Vul gewenste Huis in brand vraag in (nl)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addHouseOnFireFrench"
+                                               name="addHouseOnFireFrench"
+                                               placeholder="Vul gewenste Huis in brand vraag in (fr)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addHouseOnFireEnglish"
+                                               name="addHouseOnFireEnglish"
+                                               placeholder="Vul gewenste Huis in brand vraag in (eng)">
+                                        <button type="submit" class="btn btn-lg btn-block mt-3 mb-4 nextButton">
+                                            Toevoegen
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-6">
+                                <form class="h-100 pt-0 mt-0 mb-0 pb-0" th:action="@{|/admin/deleteHouseOnFireForm|}"
+                                      method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="deleteHouseOnFire">Huis in brand</label>
+                                        <input type="text" class="form-control mt-1 mb-5" id="deleteHouseOnFire"
+                                               name="deleteHouseOnFire"
+                                               placeholder="Verwijder gewenste Huis in brand vraag">
+                                        <button type="submit" class="btn btn-lg btn-block mt-5 mb-4 nextButton">
+                                            Verwijderen
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 mt-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Gender
+                    </h3>
+                </div>
+                <ul style="list-style-type: none; max-height: 250px; overflow-y: scroll;"
+                    class="list-group list-group-flush h-75 m-3">
+                    <li th:each="gender : ${genders}">
+                        <p th:text="${gender.getGender()}"></p>
+                    </li>
+                </ul>
+                <button class="btn btn-primary float-end nextButton m-auto mb-2 w-50" type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasBottom2" aria-controls="offcanvasBottom">Edit
+                </button>
+            </div>
+            <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom2"
+                 aria-labelledby="offcanvasBottomLabel2">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasBottomLabel2">Edit Gender</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body overflow-hidden">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <form class="pt-0 mt-0 mb-0 pb-0" th:action="@{|/admin/addGenderForm|}" method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="addGender">Gender</label>
+                                        <input type="text" class="form-control mt-1" id="addGender" name="addGender"
+                                               placeholder="Vul gewenste gender in (nl)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addGenderFrench"
+                                               name="addGenderFrench"
+                                               placeholder="Vul gewenste gender in (fr)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addGenderEnglish"
+                                               name="addGenderEnglish"
+                                               placeholder="Vul gewenste gender in (eng)">
+                                        <button type="submit" class="btn btn-lg btn-block mt-3 mb-4 nextButton">
+                                            Toevoegen
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-6">
+                                <form class="h-100 pt-0 mt-0 mb-0 pb-0" th:action="@{|/admin/deleteGenderForm|}"
+                                      method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="deleteGender">Gender</label>
+                                        <input type="text" class="form-control mt-1 mb-5" id="deleteGender"
+                                               name="deleteGender" placeholder="Verwijder gewenste Gender">
+                                        <button type="submit" class="btn btn-lg btn-block mt-5 mb-4 nextButton">
+                                            Verwijderen
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 mt-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Kristallen bol
+                    </h3>
+                </div>
+                <ul style="list-style-type: none; max-height: 250px; overflow-y: scroll;"
+                    class="list-group list-group-flush h-75 m-3">
+                    <li th:each="crystalBall : ${crystalBalls}">
+                        <p th:text="${crystalBall.getCrystalBall()}"></p>
+                    </li>
+                </ul>
+                <button class="btn btn-primary float-end nextButton m-auto mb-2 w-50" type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasBottom3" aria-controls="offcanvasBottom">Edit
+                </button>
+            </div>
+            <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom3"
+                 aria-labelledby="offcanvasBottomLabel3">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasBottomLabel3">Edit kristallen bol vraag</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body overflow-hidden">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <form class="pt-0 mt-0 mb-0 pb-0" th:action="@{|/admin/addCrystalBallForm|}"
+                                      method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="addCrystalBall">Kristallen bol</label>
+                                        <input type="text" class="form-control mt-1" id="addCrystalBall"
+                                               name="addCrystalBall"
+                                               placeholder="Vul gewenste kristallen bol vraag in (nl)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addCrystalBallFrench"
+                                               name="addCrystalBallFrench"
+                                               placeholder="Vul gewenste kristallen bol vraag in (fr)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addCrystalBallEnglish"
+                                               name="addCrystalBallEnglish"
+                                               placeholder="Vul gewenste kristallen bol vraag in (eng)">
+                                        <button type="submit" class="btn btn-lg btn-block mt-3 mb-4 nextButton">
+                                            Toevoegen
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-6">
+                                <form class="h-100 pt-0 mt-0 mb-0 pb-0" th:action="@{|/admin/deleteCrystalBallForm|}"
+                                      method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="deleteCrystalBall">Kristallen bol</label>
+                                        <input type="text" class="form-control mt-1 mb-5" id="deleteCrystalBall"
+                                               name="deleteCrystalBall" placeholder="Verwijder gewenste kristallen bol">
+                                        <button type="submit" class="btn btn-lg btn-block mt-5 mb-4 nextButton">
+                                            Verwijderen
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 mt-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Interesse
+                    </h3>
+                </div>
+                <ul style="list-style-type: none; max-height: 250px; overflow-y: scroll;"
+                    class="list-group list-group-flush h-75 m-3">
+                    <li th:each="interest : ${interests}">
+                        <p th:text="${interest.getInterests()}"></p>
+                    </li>
+                </ul>
+                <button class="btn btn-primary float-end nextButton m-auto mb-2 w-50" type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasBottom4" aria-controls="offcanvasBottom">Edit
+                </button>
+            </div>
+            <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom4"
+                 aria-labelledby="offcanvasBottomLabel4">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasBottomLabel4">Edit interesse</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body overflow-hidden">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <form class="pt-0 mt-0 mb-0 pb-0" th:action="@{|/admin/addInterestForm|}" method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="addInterest">Interesse</label>
+                                        <input type="text" class="form-control mt-1" id="addInterest" name="addInterest"
+                                               placeholder="Vul gewenste interesse vraag in (nl)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addInterestFrench"
+                                               name="addInterestFrench"
+                                               placeholder="Vul gewenste interesse in (fr)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addInterestEnglish"
+                                               name="addInterestEnglish"
+                                               placeholder="Vul gewenste interesse in (eng)">
+                                        <button type="submit" class="btn btn-lg btn-block mt-3 mb-4 nextButton">
+                                            Toevoegen
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-6">
+                                <form class="h-100 pt-0 mt-0 mb-0 pb-0" th:action="@{|/admin/deleteInterestForm|}"
+                                      method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="deleteInterest">Interesse</label>
+                                        <input type="text" class="form-control mt-1 mb-5" id="deleteInterest"
+                                               name="deleteInterest" placeholder="Verwijder gewenste interesse">
+                                        <button type="submit" class="btn btn-lg btn-block mt-5 mb-4 nextButton">
+                                            Verwijderen
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 mt-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Interesse voorkeur
+                    </h3>
+                </div>
+                <ul style="list-style-type: none; max-height: 250px; overflow-y: scroll;"
+                    class="list-group list-group-flush h-75 m-3">
+                    <li th:each="interestPreference : ${interestsPreferences}">
+                        <p th:text="${interestPreference.getInterestsPreference()}"></p>
+                    </li>
+                </ul>
+                <button class="btn btn-primary float-end nextButton m-auto mb-2 w-50" type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasBottom5" aria-controls="offcanvasBottom">Edit
+                </button>
+            </div>
+            <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom5"
+                 aria-labelledby="offcanvasBottomLabel5">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasBottomLabel5">Edit interesse voorkeur</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body overflow-hidden">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <form class="pt-0 mt-0 mb-0 pb-0" th:action="@{|/admin/addInterestPreferenceForm|}"
+                                      method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="addInterestPreference">interesse voorkeur</label>
+                                        <input type="text" class="form-control mt-1" id="addInterestPreference"
+                                               name="addInterestPreference"
+                                               placeholder="Vul gewenste interesse voorkeur in (nl)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addInterestPreferenceFrench"
+                                               name="addInterestPreferenceFrench"
+                                               placeholder="Vul gewenste interesse voorkeur in (fr)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addInterestPreferenceEnglish"
+                                               name="addInterestPreferenceEnglish"
+                                               placeholder="Vul gewenste interesse voorkeur in (eng)">
+                                        <button type="submit" class="btn btn-lg btn-block mt-3 mb-4 nextButton">
+                                            Toevoegen
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-6">
+                                <form class="h-100 pt-0 mt-0 mb-0 pb-0"
+                                      th:action="@{|/admin/deleteInterestPreferenceForm|}" method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="deleteInterestPreference">Interesse Voorkeur</label>
+                                        <input type="text" class="form-control mt-1 mb-5" id="deleteInterestPreference"
+                                               name="deleteInterestPreference"
+                                               placeholder="Verwijder gewenste interesse voorkeur">
+                                        <button type="submit" class="btn btn-lg btn-block mt-5 mb-4 nextButton">
+                                            Verwijderen
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4 mt-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        Perfecte dag
+                    </h3>
+                </div>
+                <ul style="list-style-type: none; max-height: 250px; overflow-y: scroll;"
+                    class="list-group list-group-flush h-75 m-3">
+                    <li th:each="perfectDay : ${perfectDays}">
+                        <p th:text="${perfectDay.getPerfectDay()}"></p>
+                    </li>
+                </ul>
+                <button class="btn btn-primary float-end nextButton m-auto mb-2 w-50" type="button"
+                        data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasBottom6" aria-controls="offcanvasBottom">Edit
+                </button>
+            </div>
+            <div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom6"
+                 aria-labelledby="offcanvasBottomLabel6">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasBottomLabel6">Edit perfecte dag vraag</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body overflow-hidden">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <form class="pt-0 mt-0 mb-0 pb-0 text-center" th:action="@{|/admin/addPerfectDayForm|}"
+                                      method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="addPerfectDay">Perfecte dag</label>
+                                        <input type="text" class="form-control mt-1" id="addPerfectDay"
+                                               name="addPerfectDay"
+                                               placeholder="Vul gewenste perfecte dag vraag (nl)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addPerfectDayFrench"
+                                               name="addPerfectDayFrench"
+                                               placeholder="Vul gewenste perfecte dag vraag (fr)">
+                                    </div>
+                                    <div class="form-group col-12 text-center">
+                                        <input type="text" class="form-control mt-1" id="addPerfectDayEnglish"
+                                               name="addPerfectDayEnglish"
+                                               placeholder="Vul gewenste perfecte dag vraag (eng)">
+                                    </div>
+                                    <button type="submit" class="btn btn-lg btn-block mt-3 mb-4 nextButton">Toevoegen
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="col-6">
+                                <form class="h-100 pt-0 mt-0 mb-0 pb-0" th:action="@{|/admin/deletePerfectDayForm|}"
+                                      method="post">
+                                    <div class="form-group col-12 text-center">
+                                        <label for="deletePerfectDay">Perfecte dag</label>
+                                        <input type="text" class="form-control mt-1 mb-5" id="deletePerfectDay"
+                                               name="deletePerfectDay"
+                                               placeholder="Verwijder gewenste perfecte dag vraag">
+                                        <button type="submit" class="btn btn-lg btn-block mt-5 mb-4 nextButton">
+                                            Verwijderen
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

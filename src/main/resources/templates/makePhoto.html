@@ -1,0 +1,140 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Neem foto</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/static/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mt-3">
+            <h1 class="text-center" th:text="#{fotopage}"></h1>
+        </div>
+    </div>
+    <div class="col-12 mt-3">
+        <form th:action="@{|/addPhoto/${person.getId()}?language=${#locale.language}|}" method="post" enctype="multipart/form-data">
+            <div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 img-thumbnail border-0 text-center" id="camDiv">
+                            <video id="cam" autoplay></video>
+                        </div>
+                        <div class="col-12 col-lg-6 img-thumbnail border-0 text-center" id="photoDiv">
+                            <canvas id="canvas" style="display:none"></canvas>
+                            <img id="photo" alt="" src="">
+                        </div>
+                        <div class="col-12">
+                            <label for="dataUrl"></label>
+                            <input class="visually-hidden" type="text" name="dataUrl" id="dataUrl">
+                        </div>
+                        <div class="col-6 mt-3 text-center" id="retakeBtnDiv">
+                            <div class="panel">
+                                <button class="nextButton" id="retakeBtn">Retake photo!</button>
+                            </div>
+                        </div>
+                        <div class="col-6 mt-3 text-center" id="snapBtnDiv">
+                            <div class="panel">
+                                <button class="nextButton" id="snapBtn" th:text="#{fotopage}" ></button>
+                            </div>
+                        </div>
+                        <div class="col-6 mt-3 text-center">
+                            <input type="submit" th:value="#{fotopagesave}" id="saveBtn" class="btn btn-lg mb-3 nextButton"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    // reference to the current media stream
+    let mediaStream = null;
+
+    document.getElementById("snapBtn").style.display = "none";
+    document.getElementById("retakeBtnDiv").style.display = "none";
+    document.getElementById("photoDiv").style.display = "none";
+    document.getElementById("saveBtn").style.display = "none";
+
+    setTimeout(showStuff, 1500);
+
+    function showStuff() {
+        document.getElementById("snapBtn").style.display = "inline";
+
+    }
+
+    async function getMediaStream(constraints) {
+        try {
+            mediaStream = await navigator.mediaDevices.getUserMedia(constraints);
+            let video = document.getElementById('cam');
+            video.srcObject = mediaStream;
+            video.onloadedmetadata = (event) => {
+                video.play();
+            };
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
+    function takePicture() {
+        let canvas = document.getElementById('canvas');
+        let video = document.getElementById('cam');
+        let photo = document.getElementById('photo');
+        let dataUrl = document.getElementById('dataUrl');
+        let context = canvas.getContext('2d');
+
+        const height = video.videoHeight;
+        const width = video.videoWidth;
+
+        if (width && height) {
+            canvas.width = width;
+            canvas.height = height;
+            context.drawImage(video, 0, 0, width, height);
+            const data = canvas.toDataURL('image/png');
+            photo.setAttribute('src', data);
+            dataUrl.setAttribute('value', data);
+        }
+    }
+
+    document.getElementById('snapBtn').onclick = (event) => {
+        takePicture();
+        hideCamera();
+        event.preventDefault();
+    }
+
+    document.getElementById('retakeBtn').onclick = (event) => {
+        showCamera();
+        event.preventDefault();
+    }
+
+    function hideCamera() {
+        document.getElementById("camDiv").style.display = "none";
+        document.getElementById("photoDiv").style.display = "inline";
+        document.getElementById("snapBtnDiv").style.display = "none";
+        document.getElementById("retakeBtnDiv").style.display = "inline";
+        document.getElementById("saveBtn").style.display = "inline";
+    }
+
+    function showCamera() {
+        document.getElementById("camDiv").style.display = "inline";
+        document.getElementById("photoDiv").style.display = "none";
+        document.getElementById("snapBtnDiv").style.display = "inline";
+        document.getElementById("retakeBtnDiv").style.display = "none";
+        document.getElementById("saveBtn").style.display = "none";
+    }
+
+    window.onload = async function () {
+        // Define the initial constraints
+        let constraints = {video: {facingMode: 'user'}, audio: false};
+
+        // Get the media stream when the page is loaded
+        await getMediaStream(constraints);
+    };
+</script>
+</body>
+</html>

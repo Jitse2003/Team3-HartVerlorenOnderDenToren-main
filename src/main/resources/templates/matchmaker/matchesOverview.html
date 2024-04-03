@@ -1,0 +1,188 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Matches overzicht</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="mb-5">
+<div th:replace="~{fragments/header :: headerfragment}">Header</div>
+
+<div class="container-fluid">
+    <div class="row justify-content-center mt-3">
+        <div class="col-8">
+            <div class="card">
+                <div class="row">
+                    <div class="col-4 text-center align-items-center my-auto">
+                        <img class="card-img w-75 m-auto"
+                             th:src="${person1.getImage()}"
+                             alt="image match" src="">
+                    </div>
+                    <div class="col-8 m-auto">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-5">
+                                    <p class="card-text">
+                                        Naam:
+                                    </p>
+                                    <p class="card-text">
+                                        Verjaardag:
+                                    </p>
+                                    <p class="card-text">
+                                        Interesses:
+                                    </p>
+                                </div>
+                                <div class="col-7">
+                                    <p th:text="${person1.getName()}" class="card-text"></p>
+                                    <p th:text="${person1.getBirthdate()}" class="card-text"></p>
+                                    <p th:text="${person1.getInterests()}" class="card-text"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-11">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true" data-bs-interval="false">
+                <div class="carousel-inner">
+                    <div class="row justify-content-center">
+                        <div class="col-1">
+                            <button class="carousel-control-prev nextButton" type="button"
+                                    data-bs-target="#carouselExampleIndicators"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                        </div>
+                        <div class="col-8">
+                            <div class="carousel-item active">
+                                <div class="card">
+                                    <div class="row justify-content-center">
+                                        <div class="col-4 my-auto">
+                                            <img class="img-thumbnail image border-0"
+                                                 th:src="${firstMatch.getPerson2().getImage()}"
+                                                 alt="image match" src="">
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <p class="card-text">
+                                                            Naam:
+                                                        </p>
+                                                        <p class="card-text">
+                                                            Verjaardag:
+                                                        </p>
+                                                        <p class="card-text">
+                                                            Interesses:
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <p th:text="${firstMatch.getPerson2().getName()}"
+                                                           class="card-text"></p>
+                                                        <p th:text="${firstMatch.getPerson2().getBirthdate()}"
+                                                           class="card-text"></p>
+                                                        <p th:text="${firstMatch.getPerson2().getInterests()}"
+                                                           class="card-text"></p>
+                                                    </div>
+                                                </div>
+                                                <p class="text-center mt-3 mb-1"
+                                                   th:text="|${firstMatch.getPercentage()}%|">
+                                                    Percentage
+                                                </p>
+                                                <div class="progress mb-5">
+                                                    <div class="progress-bar progress-bar-striped bg-danger"
+                                                         role="progressbar"
+                                                         th:style="|width: ${firstMatch.getPercentage()}%|"
+                                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <div class="text-center mt-3">
+                                                    <a th:href="@{|/matchmaker/makeMatch/${person1.getId()}/${firstMatch.getPerson2().getId()}|}">
+                                                        <button type="button" class="btn btn-lg btn-block nextButton">
+                                                            Bekijk Match!
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item" th:each="person : ${personMatches}">
+                                <div class="card">
+                                    <div class="row justify-content-center">
+                                        <div class="col-4 my-auto">
+                                            <img class="img-thumbnail image border-0"
+                                                 th:src="${person.getPerson2().getImage()}"
+                                                 alt="image match" src="">
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <p class="card-text">
+                                                            Naam:
+                                                        </p>
+                                                        <p class="card-text">
+                                                            Verjaardag:
+                                                        </p>
+                                                        <p class="card-text">
+                                                            Interesses:
+                                                        </p>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <p th:text="${person.getPerson2().getName()}"
+                                                           class="card-text"></p>
+                                                        <p th:text="${person.getPerson2().getBirthdate()}"
+                                                           class="card-text"></p>
+                                                        <p th:text="${person.getPerson2().getInterests()}"
+                                                           class="card-text"></p>
+                                                    </div>
+                                                </div>
+                                                <p class="text-center mt-3 mb-1" th:text="|${person.getPercentage()}%|">
+                                                    Percentage
+                                                </p>
+                                                <div class="progress mb-5">
+                                                    <div class="progress-bar progress-bar-striped bg-danger"
+                                                         role="progressbar"
+                                                         th:style="|width: ${person.getPercentage()}%|"
+                                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                                <div class="text-center mt-3">
+                                                    <a th:href="@{|/matchmaker/makeMatch/${person1.getId()}/${person.getPerson2().getId()}|}">
+                                                        <button type="button" class="btn btn-lg btn-block nextButton">
+                                                            Bekijk Match!
+                                                        </button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <button class="carousel-control-next nextButton" type="button"
+                                    data-bs-target="#carouselExampleIndicators"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

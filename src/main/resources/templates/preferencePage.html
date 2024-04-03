@@ -1,0 +1,167 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Love Card</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/static/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="mb-5">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12 mt-5">
+            <h1 class="text-center" th:text="#{preferencePageTitle}"></h1>
+            <form th:action="@{|/addPersonPreferences/${id}?language=${#locale.language}|}" method="post" autocomplete="off">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-6">
+                            <label for="minAge" th:text="#{minimumAge}"></label>
+                            <input type="number" class="form-control mt-1" id="minAge" name="minAge"
+                                   th:placeholder="#{minimumAge.placeholder}"
+                                   min="18" required>
+                        </div>
+                        <div class="col-6">
+                            <label for="maxAge" th:text="#{maximumAge}"></label>
+                            <input type="number" class="form-control mt-1" id="maxAge" name="maxAge"
+                                   th:placeholder="#{maximumAge.placeholder}"
+                                   min="18" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="genderPreference" th:text="#{genderpreference}" ></label>
+                    <div class="position-relative">
+                        <select class="form-control mt-1" id="genderPreference" name="genderPreferenceId" required>
+                            <option value="" th:text="#{genderpreference}"></option>
+                            <div th:if="${#locale.language} == 'en'">
+                                <div th:each="gender : ${genders}">
+                                    <option th:value="${gender.getId()}"
+                                            th:text="${gender.getGenderEnglish()}"></option>
+                                </div>
+                            </div>
+                            <div th:if="${#locale.language} == 'fr'">
+                                <div th:each="gender : ${genders}">
+                                    <option th:value="${gender.getId()}"
+                                            th:text="${gender.getGenderFrench()}"></option>
+                                </div>
+                            </div>
+                            <div th:if="${#locale.language} == 'nl'">
+                                <div th:each="gender : ${genders}">
+                                    <option th:value="${gender.getId()}"
+                                            th:text="${gender.getGender()}"></option>
+                                </div>
+                            </div>
+                        </select>
+                        <div class="arrow-down position-absolute top-50 end-0 me-3 translate-middle-y"> &darr;</div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="houseOnFire" th:text="#{houseOnFire}" ></label>
+                    <div class="position-relative">
+                        <select class="form-control mt-1" id="houseOnFire" name="houseOnFireId" required>
+                            <option value="" th:text="#{huisinvlam.placeholder}"></option>
+                            <div th:if="${#locale.language} == 'en'">
+                                <div th:each="houseOnFire : ${houseOnFires}">
+                                    <option th:value="${houseOnFire.getId()}"
+                                            th:text="${houseOnFire.getHouseOnFireEnglish()}"></option>
+                                </div>
+                            </div>
+                            <div th:if="${#locale.language} == 'fr'">
+                                <div th:each="houseOnFire : ${houseOnFires}">
+                                    <option th:value="${houseOnFire.getId()}"
+                                            th:text="${houseOnFire.getHouseOnFireFrench()}"></option>
+                                </div>
+                            </div>
+                            <div th:if="${#locale.language} == 'nl'">
+                                <div th:each="houseOnFire : ${houseOnFires}">
+                                    <option th:value="${houseOnFire.getId()}"
+                                            th:text="${houseOnFire.getHouseOnFire()}"></option>
+                                </div>
+                            </div>
+                        </select>
+                        <div class="arrow-down position-absolute top-50 end-0 me-3 translate-middle-y"> &darr;</div>
+                    </div>
+                </div>
+                <div class="form-group mt-3 ">
+                    <label th:text="#{selectInterestsPreference}"></label>
+                    <div class="mx-3 checkBoxForm">
+                        <div th:each="interestPreference : ${interestsPreferences}">
+                            <div th:if="${#locale.language} == 'fr'">
+                                <label>
+                                    <input type="checkbox" th:id="${interestPreference.getInterestsPreference()}"
+                                           name="interestsPreferenceId"
+                                           th:value="${interestPreference.getId()}" required>
+                                </label>
+                                <label class="checkBoxOption" th:for="${interestPreference.getInterestsPreference()}"
+                                       th:text="${interestPreference.getInterestsPreferenceFrench()}"></label>
+                            </div>
+                            <div th:if="${#locale.language} == 'en'">
+                                <label>
+                                    <input type="checkbox" th:id="${interestPreference.getInterestsPreference()}"
+                                           name="interestsPreferenceId"
+                                           th:value="${interestPreference.getId()}" required>
+                                </label>
+                                <label class="checkBoxOption" th:for="${interestPreference.getInterestsPreference()}"
+                                       th:text="${interestPreference.getInterestsPreferenceEnglish()}"></label>
+                            </div>
+                            <div th:if="${#locale.language} == 'nl'">
+                                <label>
+                                    <input type="checkbox" th:id="${interestPreference.getInterestsPreference()}"
+                                           name="interestsPreferenceId"
+                                           th:value="${interestPreference.getId()}" required>
+                                </label>
+                                <label class="checkBoxOption" th:for="${interestPreference.getInterestsPreference()}"
+                                       th:text="${interestPreference.getInterestsPreference()}"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="friendShipMeaning" th:text="#{friendship}"></label>
+                    <input type="text" class="form-control mt-1" id="friendShipMeaning" name="friendShipMeaning" required>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-lg btn-block nextButton" th:text="#{confirmButton}" ></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][name="interestsPreferenceId"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                checkboxes.forEach(otherCheckbox => {
+                    if (otherCheckbox !== checkbox) {
+                        otherCheckbox.removeAttribute('required');
+                    }
+                });
+            } else {
+                checkboxes.forEach(otherCheckbox => {
+                    otherCheckbox.setAttribute('required', '');
+                });
+            }
+        });
+    });
+
+    const minAgeInput = document.getElementById('minAge');
+    const maxAgeInput = document.getElementById('maxAge');
+
+    minAgeInput.addEventListener('input', updateMaxAgeMin);
+
+    function updateMaxAgeMin() {
+        const minAge = parseInt(minAgeInput.value);
+        maxAgeInput.min = minAge.toString();
+        if (parseInt(maxAgeInput.value) < minAge) {
+            maxAgeInput.value = minAge.toString();
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Sponsors</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body class="mb-5">
+<header>
+    <div class="button-container">
+        <a class="btn btn-light btn-lg mx-2 terug-button my-auto" th:href="@{/}">Terug</a>
+        <div class="centered-buttons my-3">
+            <a class="btn btn-light btn-lg mx-2 my-auto nextButton" th:href="@{/admin/sponsor}">Sponsor</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/stand}">Stand</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/event}">Event</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/settingPage}">Love Card</a>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row justify-content-around mt-5">
+        <div class="col-lg-5">
+            <form class="h-100 mt-0" th:action="@{/admin/sponsorSave}" method="post">
+                <h4>Nieuwe Sponsor toevoegen</h4>
+                <div class="form-group">
+                    <label for="name">Naam</label>
+                    <input type="text" class="form-control mt-1" id="name" name="name" placeholder="Vul sponsor naam in"
+                           required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="address">Adress</label>
+                    <input type="text" class="form-control mt-1" id="address" name="address"
+                           placeholder="Vul het address in"
+                           required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="naamVerantwoordelijke">Naam Verantwoordelijke</label>
+                    <input type="text" class="form-control mt-1" id="naamVerantwoordelijke" name="naamVerantwoordelijke"
+                           placeholder="Vul de naam van de verantwoordelijke in"
+                           required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="telefoonnummer">Contactnummer</label>
+                    <input type="text" class="form-control mt-1" id="telefoonnummer" name="telefoonnummer"
+                           placeholder="Vul het contactnummer in"
+                           required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="event">Evenement</label>
+                    <select class="form-select" id="event" name="event">
+                        <option hidden selected value="">Selecteer het event dat gesponsord wordt
+                        </option>
+                        <div th:each="event : ${events}">
+                            <option th:text="${event.getName()}"
+                                    th:value="${event.getId()}" th:id="${event.getId()}"
+                            >event name
+                            </option>
+                        </div>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="nextButton mt-3">Save</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-lg-5 mt-4 mt-lg-0">
+            <form class="h-100 mt-0" th:action="@{/admin/sponsorSelect}" method="post">
+                <h4>Sponsor toevoegen aan event</h4>
+                <div class="form-group">
+                <label for="sponsorId">Sponsor</label>
+                <select class="form-select mt-1" id="sponsorId" name="sponsorId">
+                    <option hidden selected value="">Selecteer de Sponsor
+                    </option>
+                    <div th:each="sponsor : ${sponsors}">
+                        <option th:text="${sponsor.getName()}"
+                                th:value="${sponsor.getId()}" th:id="${sponsor.getId()}"
+                        >sponsor name
+                        </option>
+                    </div>
+                </select>
+                </div>
+                <div class="form-group mt-3">
+                <label for="eventId">Evenement</label>
+                <select class="form-select mt-1" id="eventId" name="eventId">
+                    <option hidden selected value="">Selecteer het event
+                    </option>
+                    <div th:each="event : ${events}">
+                        <option th:text="${event.getName()}"
+                                th:value="${event.getId()}" th:id="${event.getId()}"
+                        >event name
+                        </option>
+                    </div>
+                </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="nextButton mt-3">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

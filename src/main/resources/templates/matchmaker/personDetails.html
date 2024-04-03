@@ -1,0 +1,65 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Details LoveCard</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body class="mb-5">
+<div class="container" style="width: 70%">
+    <div class="row">
+        <div class="col-md-6 mt-5" style="width: 80%; margin: auto">
+            <h1 class="text-center">Love Card Details</h1>
+            <form>
+                <h2 class="text-start">Eigen Details</h2>
+                <div class="row">
+                    <div class="col">
+                        <p>Naam:</p>
+                        <p>Email:</p>
+                        <p>Geboortedatum:</p>
+                        <p>Gender:</p>
+                        <p>kristallen bol vraag:</p>
+                        <p>Perfecte dag vraag:</p>
+                        <p>Interesses:</p>
+                    </div>
+                    <div class="col">
+                        <p th:text="${people.getName()}">Joske</p>
+                        <p th:text="${people.getEmail()}">Jos@gmail.com</p>
+                        <p th:text="${people.getBirthdate()}">1952/12/24</p>
+                        <p th:text="${people.getGender()}">Man</p>
+                        <p th:text="${people.getCrystalBall()}">Blauw</p>
+                        <p th:text="${people.getPerfectDay()}">Zwart</p>
+                        <p th:text="${people.getInterests()}">Sport</p>
+                    </div>
+                </div>
+                <h2 class="text-start-mt-5">Voorkeur Details</h2>
+                <div class="row">
+                    <div class="col">
+                        <p>Minimum leeftijd:</p>
+                        <p>Maximum leeftijd:</p>
+                        <p>afstand:</p>
+                        <p>Gender:</p>
+                        <p>Interesses date:</p>
+                    </div>
+                    <div class="col">
+                        <p th:text="${people.getMinAgePreference()}">20 </p>
+                        <p th:text="${people.getMaxAgePreference()}">30</p>
+                        <p th:text="${people.getGenderPreference()}">Vrouw</p>
+                        <p th:text="${people.getInterestsPreference()}">Sportief</p>
+                    </div>
+                </div>
+                <div>
+                    <button class="nextButton" href="">terug</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Bevestig Match</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/static/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-5">
+            <h1 class="text-center">Match accepteren</h1>
+            <div th:if="${match.get().getConfirmationCount() != -1}">
+                <div class="card mt-5" style="padding: 20px">
+                    <h2 class="text-start">Jouw Match</h2>
+                    <div class="row mt-2">
+                        <div class="col-10">
+                            <div class="row">
+                                <p class="col-6">Naam:</p>
+                                <p class="col-6" th:text="${matchedPerson.getName()}">Joske</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-6">Geboortedatum:</p>
+                                <p class="col-6" th:text="${matchedPerson.getBirthdate()}">1952/12/24</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-6">Gender:</p>
+                                <p class="col-6" th:text="${matchedPerson.getGender()}">Man</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-6">kristallen bal vraag:</p>
+                                <p class="col-6" th:text="${matchedPerson.getCrystalBall()}">xdcfvg buoih ugfrxtdv ghpiugydr estfhkv gbui t85r6dt ucfjv giuh78 dr6ut cfjhkvgljgi78t65rudtcvhiupot6875ridut</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-6">Perfecte dag vraag:</p>
+                                <p class="col-6" th:text="${matchedPerson.getPerfectDay()}">Zwart</p>
+                            </div>
+                            <div class="row">
+                                <p class="col-6">Interesses:</p>
+                                <p class="col-6" th:text="${matchedPerson.getInterests()}">Sport</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5 justify-content-center">
+                        <div class="col-10 text-center">
+                            <a th:href="@{|/confirmMatchAccept/${match.get().getId()}|}">
+                                <button type="button" class="nextButton">Accepteren</button>
+                            </a>
+                        </div>
+                        <div class="col-4 text-center mt-2">
+                            <a th:href="@{|/confirmMatchDeny/${match.get().getId()}/${matchedPerson.getId()}|}">
+                                <button type="button" class="annuleren">Annuleren</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div th:unless="${match.get().getConfirmationCount() != -1}">
+                <div class="card mt-5" style="padding: 20px">
+                    <div class="row">
+                        <div class="col">
+                            <p>De andere persoon heeft de match helaas geannuleerd!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

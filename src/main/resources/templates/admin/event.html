@@ -1,0 +1,90 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Event</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<header>
+    <div class="button-container">
+        <a class="btn btn-light btn-lg mx-2 terug-button my-auto" th:href="@{/}">Terug</a>
+        <div class="centered-buttons my-3">
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/sponsor}">Sponsor</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/stand}">Stand</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto nextButton" th:href="@{/admin/event}">Event</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/settingPage}">Love Card</a>
+        </div>
+    </div>
+</header>
+<h1 class="text-center mt-2">Event</h1>
+
+<div class="container">
+    <div class="row justify-content-around mt-5">
+        <div class="col-lg-5 card">
+            <h3 class="text-center mt-3">Event toevoegen</h3>
+            <form class="mt-2 border-0 shadow-none" method="post" th:action="@{/admin/eventSave}">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <label for="name">Naam event:</label>
+                        <input type="text" class="form-control mt-1 mb-4" id="name" name="name"
+                               placeholder="Vul de naam van het event in" required>
+                        <label for="date">Datum event:</label>
+                        <input type="date" class="form-control mt-1 mb-4" id="date" name="date"
+                               placeholder="Vul de datum van het event in"
+                               required>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="text-center mt-5">
+                        <button type="submit" class="btn btn-lg btn-block nextButton">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-5 mt-4 mt-lg-0 card">
+            <h3 class="text-center mt-3">Event kiezen</h3>
+            <form class="mt-2 border-0 shadow-none" method="post" th:action="@{/admin/eventSelector}">
+                <div class="row justify-content-center">
+                    <div class="col-8">
+                        <div class="form-group mt-3">
+                            <p class="form-label">Huidig event:</p>
+                            <p class="form-label mb-3 text-center" th:text="${activeEvent}"></p>
+                            <label for="eventId">Selecteer ander event:</label>
+                            <div class="position-relative">
+                                <select class="form-select" id="eventId" name="eventId" required>
+                                    <div th:each="eventsNotActive : ${events}">
+                                        <option th:text="${eventsNotActive.getName()}"
+                                                th:value="${eventsNotActive.getId()}" th:id="${eventsNotActive.getId()}"
+                                                id="event">event name
+                                        </option>
+                                    </div>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="text-center mt-5">
+                        <button type="submit" th:action="@{/admin/eventSelector}"
+                                class="btn btn-lg btn-block nextButton">Select
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    document.getElementById("eventId").addEventListener("change", function () {
+        let selectedEventId = this.value;
+        let form = document.querySelector("form[action='/eventSelector']");
+        form.action = "/eventSelector?eventId=" + selectedEventId;
+    });
+</script>
+</body>
+</html>

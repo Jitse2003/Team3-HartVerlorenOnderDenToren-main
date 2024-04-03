@@ -1,0 +1,55 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Feedback</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/static/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+<div th:replace="~{fragments/header :: headerfragment}">Header</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <div class="card">
+                <h2 class="card-header text-center">Feedback</h2>
+                <div class="card-body">
+                    <form method="post" th:action="@{|/feedback/${person.getId()}|}">
+                        <div class="form-group mt-3 interests">
+                            <label>Geef een score voor de date:</label>
+                            <div class="mx-3 checkBoxForm">
+                                <input type="radio" id="1" name="score" value="1" required>
+                                <label for="1">1</label>
+                                <input type="radio" id="2" name="score" value="2" required>
+                                <label for="2">2</label>
+                                <input type="radio" id="3" name="score" value="3" required>
+                                <label for="3">3</label>
+                                <input type="radio" id="4" name="score" value="4" required>
+                                <label for="4">4</label>
+                                <input type="radio" id="5" name="score" value="5" required>
+                                <label for="5">5</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="feedbackText">Feedback:</label>
+                            <input type="text" class="form-control mt-1" id="feedbackText" name="feedbackText"
+                                   placeholder="Vul hier je feedback in" required>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-lg btn-block nextButton">Verzend!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

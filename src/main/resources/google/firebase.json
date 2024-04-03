@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "hartverlorenonderdentoren",
+  "private_key_id": "87bcd5d551683a6ab1d0299229823bf1cb05c638",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCMV2er6J/xOZEQ\nh0IOtV6xuv2cqZgxU0lnRx1A1KpzRG4M36FMOvtY2II3m4+fiPI0EQO0+xW8s9IP\n5X+Glb8tEkcsDbHPWJeS+O92/f0LhSj65zxAs0sCNxABKHV0ABPyYc5x4prnbyfP\n8aGvR7MowWi26+Ff9v6GAGscrp6SZvzwODVbBShrhkBiq1uBTEGCJFZvMfIkWgVo\nEVag0VYIwxD4qsz2o2w2Xd9rzLadaGzBv3++oY5E051PuqgtxCxAFzVk0vHCSy/j\nA8k+b+FR8RI/DqKUqjfnNp5B3x00wVHp5ypXgXQTZFVlgM1G50IyCwjil/k1H0PJ\nrdjrK2jFAgMBAAECggEAEixNVfMBJyULtma1dJ8i3IP4zF0fwp9k3XVVgewoCFYf\npBYfVnY6zwX2UsoXnpKGvpxHbRuodG+ar4lJ6r0gbO81fSxmzpFLy3Hl3HRGXMQJ\nCvh/kmdFOsuzjFrXXsaVzqjAqXmtEnQP5TsGc2Km/guRikJgRGOBEQwj0qqACTgQ\nx+ZqcWjsrS176iC1w77yo+tOUzCxLtS7a5KBkkBTL161Iqh2/OSRmCstVEw60YZG\n3aQKZC3PKqKHfVERGZeZ0EP+2ZP7I85gunKlrhlk/IgTennzUqOk9ASD6s1CPliK\nUyujgrAT/C5tokRv1aBWBkoqSFc6F1AQc9oRwSRtvwKBgQDAADHXxdUAVcvxsj+l\naep9XJNP4/h66Ek3yTUJrL8tM80XVtNHZvWqBEqO/z20HR0NokkpLJaVlK8iGaWa\nm0NL9RxzQcrWGCUxo+q65Z61QrgZ8Ts3VqJwb63S+WlgNshm7A6h6k1J3gHIKB2s\ngADu3joE67R7XseF8/H18rU5pwKBgQC7HwRRrDF/EG3KJ0TvzKPsNer4zbV3EWoC\noJjoCrab5Hv4ah+B5oIzLG0h1Yhx/EHEZCMQr3K+4KCzBa4OJAA865YyrqxSofkX\nNrcx8y/jre/Nlobo+DpwfqeFCHF7yTwAQH9rHGM3ylCftdYORLrtg83casysYaw6\nLgr+GRw/swKBgQCFe90rMSwL5po6d/1NyBwxebok8c5fzLySnz1Tc5kaGQh+MGwF\nGSy0PfWEAynn3dHEF86bZJdweQVlRMVgfo9D8K4N53DYdcLuBxL7SwaS6EbMKm1L\n5NxcJRiJM8MyFAQxoe3uXdHMCB/fAxzWP8vmRfO6VhCNMPCwTVAr+MhLwwKBgQCj\nZbZTy1V9a08z046zB7OstHh2wsrPKnmzyaE8Hv7OqnpGtgTFXhAbt5Okk94OCwUz\nBW5JR6ufWm95ZGBVIMLEb8Q8haMclSv6RWE7UOxkmKJqmCM+lGQTj8WguXq/aT3n\nymp5kdRiB1zX2eUNmJ7SgOHms6v+a1wFgec/c5XjWQKBgBcxBjN0wENcQHZ2/79p\n/ReePzciaST4qcmC/JsqAmwtHauTE5U2H9cFthbLvNCWqVOcVi/mJ2+mpaRrOiPy\nctF0mCq/1NB+gFQMEnjzJweVGqDT6+9lSuSzcbQgXIC0H4VUuoEUTPlAlast9nCz\njPkSrS2SIjom3nmU3HbiSIQX\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-jf15y@hartverlorenonderdentoren.iam.gserviceaccount.com",
+  "client_id": "116959811557546038147",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-jf15y%40hartverlorenonderdentoren.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

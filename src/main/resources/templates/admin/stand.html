@@ -1,0 +1,82 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Standjes</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body class="mb-5">
+<header>
+    <div class="button-container">
+        <a class="btn btn-light btn-lg mx-2 terug-button my-auto" th:href="@{/}">Terug</a>
+        <div class="centered-buttons my-3">
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/sponsor}">Sponsor</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto nextButton" th:href="@{/admin/stand}">Stand</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/event}">Event</a>
+            <a class="btn btn-light btn-lg mx-2 my-auto" th:href="@{/admin/settingPage}">Love Card</a>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="row justify-content-around mt-5">
+        <div class="col-lg-5">
+            <form class="h-100 mt-0" th:action="@{/admin/standSave}" method="post">
+                <h4>Nieuwe Stand toevoegen</h4>
+                <div class="form-group">
+                    <label for="name">Naam</label>
+                    <input type="text" class="form-control mt-1" id="name" name="name" placeholder="Vul stand naam in"
+                           required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="nameResponsiblePerson">Naam Verantwoordelijke</label>
+                    <input type="text" class="form-control mt-1" id="nameResponsiblePerson" name="nameResponsiblePerson"
+                           placeholder="Vul de naam van de verantwoordelijke in"
+                           required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="info">Extra Info</label>
+                    <textarea type="text" class="form-control mt-1" id="info" name="info"
+                           placeholder="Geef extra informatie over het standje"
+                           required></textarea>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="sponsor">Sponsor</label>
+                    <select class="form-select" id="sponsor" name="sponsor">
+                        <option hidden selected value="">Selecteer de sponsor van het standje
+                        </option>
+                        <div th:each="sponsor : ${sponsorList}">
+                            <option th:text="${sponsor.getName()}"
+                                    th:value="${sponsor.getId()}" th:id="${sponsor.getId()}"
+                            >event name
+                            </option>
+                        </div>
+                    </select>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="event">Evenement</label>
+                    <select class="form-select" id="event" name="event">
+                        <option hidden selected value="">Selecteer het event dat het standje op staat
+                        </option>
+                        <div th:each="event : ${eventList}">
+                            <option th:text="${event.getName()}"
+                                    th:value="${event.getId()}" th:id="${event.getId()}"
+                            >event name
+                            </option>
+                        </div>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="nextButton mt-3">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

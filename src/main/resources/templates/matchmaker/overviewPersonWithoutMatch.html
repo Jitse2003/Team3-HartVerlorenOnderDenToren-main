@@ -1,0 +1,155 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Overzicht personen</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body class="mb-5">
+<div th:replace="~{fragments/header :: headerfragment}">Header</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-12 col-lg-10">
+            <h1 class="text-center">Overzicht Personen</h1>
+            <div class="alert alert-danger" role="alert" id="alert">
+                Er zijn niet genoeg personen in de database!
+            </div>
+            <div class="row justify-content-center mt-3">
+                <form class="mb-3">
+                    <div class="row">
+                        <div class="col">
+                            <h3>Filters</h3>
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" class="nextButton m-0 p-2 fs-6 w-100"> zoek
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="col-12">
+                            <label for="name">Naam:</label>
+                            <input th:value="${name}" type="text" class="form-control" id="name" name="name" autocomplete="on">
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-6 col-md-3">
+                            <label for="maxPersonAmount">Aantal Personen:</label>
+                            <input type="number" class="form-control" th:value="${maxPersonAmount}" id="maxPersonAmount"
+                                   name="maxPersonAmount">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label for="gender">Gender:</label>
+                            <select class="form-control" id="gender" name="gender">
+                                <option th:text="${gender}" th:value="${gender}" hidden selected value="">Selecteer gender
+                                </option>
+                                <div th:each="gender : ${genders}">
+                                    <option th:value="${gender.getGender()}"
+                                            th:text="${gender.getGender()}">
+                                        gender select
+                                    </option>
+                                </div>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label for="minAge">Min leeftijd:</label>
+                            <input th:value="${minAge}" type="number" class="form-control" id="minAge" name="minAge">
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label for="maxAge">Max leeftijd:</label>
+                            <input th:value="${maxAge}" type="number" class="form-control" id="maxAge" name="maxAge">
+                        </div>
+                    </div>
+                </form>
+                <form class="d-flex flex-wrap" method="post" th:action="@{/matchmaker/overviewPersonWithoutMatch}">
+                    <div class="col-sm-12 col-md-6 col-lg-4 cardsTabletView d-flex justify-content-center"
+                         th:each="person, p : ${personList}" th:unless="${p.index >= maxPersonAmount}">
+                        <label class="my-4 w-75" th:for="${person.getId()}">
+                            <input type="radio" name="personChosen" class="card-input-element d-none"
+                                   th:id="${person.getId()}" th:value="${person.getId()}"
+                                   autocomplete="off" required>
+                            <div class="card card-input-element">
+                                <h5 class="card-header text-center" th:text="${person.getName()}">SurName Name</h5>
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <p class="card-text">
+                                                Geslacht:
+                                            </p>
+                                            <p class="card-text">
+                                                Leeftijd:
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="card-text" th:text="${person.getGender()}">
+                                                Gender
+                                            </p>
+                                            <p class="card-text"
+                                               th:text="${today.getYear() - person.getBirthdate().getYear()}">
+                                                Age
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+
+                    </div>
+                    <div class="col-12 d-flex justify-content-center mt-5">
+                        <button type="submit" id="linkAlgorithm"
+                                class="btn btn-lg btn-block nextButton">Zoek potentiële matches
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" th:inline="javascript">
+    const checkboxes = document.querySelectorAll('input[type="input"][name="personChosen"]');
+    const list = [[${people}]];
+    const personList = [[${personList}]];
+
+    window.addEventListener("load", checkListMatches)
+    function checkListMatches() {
+        if (list.length < 10) {
+            document.getElementById('alert').style.display = "block";
+            document.getElementById('linkAlgorithm').disabled = true;
+        }
+
+    }
+    function startUp() {
+        document.getElementById('alert').style.display = "none";
+        if (personList.length === 0){
+            document.getElementById('linkAlgorithm').disabled = true;
+        }
+
+    }
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                checkboxes.forEach(otherCheckbox => {
+                    if (otherCheckbox !== checkbox) {
+                        otherCheckbox.removeAttribute('required');
+                    }
+                });
+            } else {
+                checkboxes.forEach(otherCheckbox => {
+                    otherCheckbox.setAttribute('required', '');
+                });
+            }
+        });
+    });
+
+    startUp();
+</script>
+</body>
+
+</html>

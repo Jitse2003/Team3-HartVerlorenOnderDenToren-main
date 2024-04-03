@@ -1,0 +1,89 @@
+<!DOCTYPE html SYSTEM "http://thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Match</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" href="/css/stylesheet.css">
+    <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"
+            href="/static/js/bootstrap.bundle.min.js"></script>
+</head>
+<body style="width: 100%">
+<div th:replace="~{fragments/header :: headerfragment}">Header</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-5">
+            <div class="card m-3">
+                <div class="container text-center m-1">
+                    <img class="card-img-top w-50"
+                         src=""
+                         th:src="${person1.getImage()}"
+                         alt="image match">
+                </div>
+                <h5 th:text="|${person1.getName()}|" class="card-title text-center"></h5>
+                <div class="card-body">
+
+                    <div class="card-text">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Gender:</strong><span th:text="| ${person1.getGender()}|" ></span></li>
+                            <li class="list-group-item"><strong>Kristallen bal vraag:</strong><span th:text="| ${person1.getCrystalBall()}|" ></span></li>
+                            <li class="list-group-item"><strong>Perfecte dag vraag:</strong><span th:text="| ${person1.getPerfectDay()}|" ></span></li>
+                            <li class="list-group-item"><strong>Leeftijd: </strong><span th:text="${today.getYear()} - ${person1.getBirthdate().getYear()}" ></span></li>
+                            <li class="list-group-item"><strong>Interesses:</strong><span th:text="| ${person1.getInterests()}|" ></span></li>
+                            <li class="list-group-item"><strong>Huis in brand vraag:</strong><span th:text="| ${person1.getHouseOnFire()}|" ></span></li>
+                            <li class="list-group-item"><strong>Open vraag bekendheid:</strong><span th:text="| ${person1.getFamous()}|" ></span></li>
+                            <li class="list-group-item"><strong>Open vraag vriendschap:</strong><span th:text="| ${person1.getFriendshipMeaning()}|" ></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+        </div>
+        <div class="col-5">
+            <div class="card m-3">
+                <div class="container text-center m-1">
+                    <img class="card-img-top w-50"
+                         src=""
+                         th:src="${person2.getImage()}"
+                         alt="image match">
+                </div>
+                <h5 th:text="|${person2.getName()}|" class="card-title text-center"></h5>
+
+                <div class="card-body">
+                    <div class="card-text">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Gender:</strong><span th:text="| ${person2.getGender()}|" ></span></li>
+                            <li class="list-group-item"><strong>Kristallen bal vraag:</strong><span th:text="| ${person2.getCrystalBall()}|" ></span></li>
+                            <li class="list-group-item"><strong>Perfecte dag vraag:</strong><span th:text="| ${person2.getPerfectDay()}|" ></span></li>
+                            <li class="list-group-item"><strong>Leeftijd: </strong><span th:text="${today.getYear()} - ${person2.getBirthdate().getYear()}" ></span></li>
+                            <li class="list-group-item"><strong>Interesses:</strong><span th:text="| ${person2.getInterests()}|" ></span></li>
+                            <li class="list-group-item"><strong>huis in vlam vraag:</strong><span th:text="| ${person2.getHouseOnFire()}|" ></span></li>
+                            <li class="list-group-item"><strong>Open vraag bekendheid:</strong><span th:text="| ${person2.getFamous()}|" ></span></li>
+                            <li class="list-group-item"><strong>Open vraag vriendschap:</strong><span th:text="| ${person2.getFriendshipMeaning()}|" ></span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+<form class="bg-transparent shadow-none text-center"
+      th:action="@{|/matchmaker/makeMatch/${personId1}/${personId2}|}" method="post">
+    <div>
+        <input type="submit" value="Match!" class="btn btn-lg mb-3 nextButton"/>
+        <br>
+
+        <a th:href="@{|/matchmaker/matchesOverview/${person1.getId()}|}">
+            <button type="button" class="btn btn-lg nextButton">Back</button>
+        </a>
+
+    </div>
+</form>
+</div>
+</body>
+</html>
